@@ -9,8 +9,8 @@ from application.forms import Monsterform, TypeForm
 @app.route("/", methods=["POST", "GET"])
 def index():
     mtypes = MonsterType.query.all()
-    mname = MonsterName.query.all()
-    return render_template("index.html", title="Yu-Gi-Oh! Duel Monsters Trading Card Game", mtypes=mtypes, mname=mname)
+    mnames = MonsterName.query.all()
+    return render_template("index.html", title="Yu-Gi-Oh! Duel Monsters Trading Card Game", mtypes=mtypes, mnames=mnames)
 
 #CREATE the duel monster type.
 #Location for the app function: ip_address:5000/monstertype
@@ -88,9 +88,27 @@ def update(id):
     #If the user navigates the URL, returns the template to updatename.html
     return render_template("updatename.html", title="Update the Duel Monster card name", form=form)
         
-        
-        
-        
+#DELETE duel monster type
+#Location for the app function: ip_address:5000/deletetype
+@app.route("/deletetype/<int:id>")
+def deletetype(id):
+    mtype = MonsterType.query.get(id)
+    db.session.delete(mtype)
+    db.session.commit()
+    return redirect(url_for("index"))
+
+#DELETE duel monster name
+#Location for the app function: ip_address:5000/deletename
+@app.route("/deletename/<int:id>")
+def delete(id):
+    #Relative to the data the user will delete via the ID
+    name = MonsterName.query.get(id)
+    #Deleting the item from the database
+    db.session.delete(name)
+    #Commit the new changes
+    db.session.commit()
+    #Returnthe URL via the index function. 
+    return redirect(url_for('index'))        
         
         
         
