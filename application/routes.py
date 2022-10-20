@@ -1,0 +1,106 @@
+from asyncio import Task
+from flask import render_template, url_for, redirect, request 
+from application import app, db
+from application.models import MonsterName, MonsterType
+from application.forms import Monsterform, TypeForm
+
+#READ BOTH DATABASES
+#Location for the app function: ip_address:5000
+@app.route("/", methods=["POST", "GET"])
+def index():
+    mtypes = MonsterType.query.all()
+    mname = MonsterName.query.all()
+    return render_template("index.html", title="Yu-Gi-Oh! Duel Monsters Trading Card Game", mtypes=mtypes, mname=mname)
+
+#CREATE the duel monster type.
+#Location for the app function: ip_address:5000/monstertype
+@app.route("/monstertype", methods=["POST", "GET"])
+def typeadd():
+    form = TypeForm()
+    if form.validate_on_submit():
+        mtypes = MonsterType(
+            name = form.name.data
+        )
+        db.session.add(mtypes)
+        db.session.commit()
+        return redirect(url_for("index"))
+    return render_template("addtype.html", title="Enter a new Duel Monster type", form=form)
+
+#CREATE the duel monster card name.
+#Location for the app function: ip_address:5000/monstername
+@app.route("/monstername", methods=["POST", "GET"])
+def add():
+    #Navigates to MonsterForm
+    form = Monsterform
+    #Validates if the user entered the submit button
+    if form.validates_on_submit():
+        #The variable "names" will be displayed on the form
+        #The MonsterName will be added to the database
+        monsters = MonsterName(
+            names = form.name.data,
+            #Foreign key used as a option to add to the create process
+            fk_typeid = form.fk_typeid.data
+        )
+        #The code add to the database.
+        db.session.add(monsters)
+        #The code will commit the changes.
+        db.session.commit()
+        #The code will redirect to the index url function.
+        return redirect(url_for("index"))
+    #Otherwise the template returns the add.html.
+    return render_template("addname.html", title="Enter a new Duel Monster card name", form=form)
+
+#UPDATE the duel monster type
+#Location for the app function: ip_address:5000/updatemonstertype
+@app.route("/updatemonstertype/<int:id>", methods=["GET", "POST"])
+def updatemonstertype(id):
+    form = TypeForm()
+    mtypes = MonsterType.query.get(id)
+    if form.validate_on_submit():
+        mtypes.name = form.type.data
+        db.session.commit()
+        return redirect(url_for("index"))
+    elif request.method == "GET":
+        form.type.data = mtypes.name
+    return render_template("updatetype.html", title="Update the Duel Monster type", form=form)
+
+#UPDATE the duel monster name.
+#Location for the app function: ip_address:5000/updatemonstername
+@app.route("/updatemonstername/<int:id>", methods=["GET", "POST"])
+def update(id):
+    form = Monsterform()
+    #Retrieves one duel monster name via specified ID.
+    name = MonsterName.query.get(id)
+    #POST method & if the user clicks the submit button.
+    if form.validate_on_submit():
+        #The data is edited relative to the new information via the user.
+        name.name = form.name.data
+        name.fk_typeid = form.fk_typeid.data
+        #Commit the updated changes
+        db.session.commit()
+        #Redirects the URL via the index function
+        return redirect(url_for("index"))
+    #If the request method is a GET
+    elif request.method == "GET":
+        #Update the form in the database
+        form.name.data = name.name
+        form.fk_typeid.data = name.fk_typeid
+    #If the user navigates the URL, returns the template to updatename.html
+    return render_template("updatename.html", title="Update the Duel Monster card name", form=form)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
