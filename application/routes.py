@@ -39,7 +39,7 @@ def addname():
         #The MonsterName will be added to the database
         monsters = MonsterName(
             name = form.name.data,
-            #stars = form.stars.data
+            stars = form.stars.data
             #Foreign key used as a option to add to the create process
             
         )
@@ -59,11 +59,11 @@ def updatetype(mtid):
     form = TypeForm()
     mtypes = MonsterType.query.get(mtid)
     if form.validate_on_submit():
-        mtypes.name = form.type.data
+        mtypes.type = form.type.data
         db.session.commit()
         return redirect(url_for("index"))
     elif request.method == "GET":
-        form.type.data = mtypes.name
+        form.type.data = mtypes.type
     return render_template("updatetype.html", title="Update the Duel Monster type", form=form)
 
 #UPDATE the duel monster name.
@@ -77,7 +77,7 @@ def updatename(id):
     if form.validate_on_submit():
         #The data is edited relative to the new information via the user.
         name.name = form.name.data
-        name.fk_typeid = form.fk_typeid.data
+        
         #Commit the updated changes
         db.session.commit()
         #Redirects the URL via the index function
@@ -86,7 +86,7 @@ def updatename(id):
     elif request.method == "GET":
         #Update the form in the database
         form.name.data = name.name
-        form.fk_typeid.data = name.fk_typeid
+        
     #If the user navigates the URL, returns the template to updatename.html
     return render_template("updatename.html", title="Update the Duel Monster card name", form=form)
         

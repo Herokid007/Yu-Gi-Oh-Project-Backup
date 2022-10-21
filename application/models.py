@@ -11,6 +11,6 @@ class MonsterType(db.Model):
 class MonsterName(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30))
-    #stars = db.Column(db.Integer)
+    stars = db.Column(db.Integer)
     #fk_typeid = db.Column(db.Integer, db.ForeignKey('monster_type.mtid'))
     
