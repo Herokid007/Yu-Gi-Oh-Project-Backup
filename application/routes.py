@@ -14,8 +14,8 @@ def index():
 
 #CREATE the duel monster type.
 #Location for the app function: ip_address:5000/monstertype
-@app.route("/monstertype", methods=["POST", "GET"])
-def typeadd():
+@app.route("/addtype", methods=["POST", "GET"])
+def addtype():
     form = TypeForm()
     if form.validate_on_submit():
         mtypes = MonsterType(
@@ -28,8 +28,8 @@ def typeadd():
 
 #CREATE the duel monster card name.
 #Location for the app function: ip_address:5000/monstername
-@app.route("/monstername", methods=["POST", "GET"])
-def add():
+@app.route("/addname", methods=["POST", "GET"])
+def addname():
     #Navigates to MonsterForm
     form = Monsterform
     #Validates if the user entered the submit button
@@ -52,8 +52,8 @@ def add():
 
 #UPDATE the duel monster type
 #Location for the app function: ip_address:5000/updatemonstertype
-@app.route("/updatemonstertype/<int:id>", methods=["GET", "POST"])
-def updatemonstertype(id):
+@app.route("/updatetype/<int:id>", methods=["GET", "POST"])
+def updatetype(id):
     form = TypeForm()
     mtypes = MonsterType.query.get(id)
     if form.validate_on_submit():
@@ -66,8 +66,8 @@ def updatemonstertype(id):
 
 #UPDATE the duel monster name.
 #Location for the app function: ip_address:5000/updatemonstername
-@app.route("/updatemonstername/<int:id>", methods=["GET", "POST"])
-def update(id):
+@app.route("/updatename/<int:id>", methods=["GET", "POST"])
+def updatename(id):
     form = Monsterform()
     #Retrieves one duel monster name via specified ID.
     name = MonsterName.query.get(id)
@@ -100,7 +100,7 @@ def deletetype(id):
 #DELETE duel monster name
 #Location for the app function: ip_address:5000/deletename
 @app.route("/deletename/<int:id>")
-def delete(id):
+def deletename(id):
     #Relative to the data the user will delete via the ID
     name = MonsterName.query.get(id)
     #Deleting the item from the database

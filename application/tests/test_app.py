@@ -92,15 +92,15 @@ class TestUpdateType2(TestBase):
 
 #Test deleting a Duel Monster name from database
 class TestDeleteName(TestBase):
-    def test_del_o(self):
+    def test_delete_name(self):
         response = self.client.get(url_for('deletename', id = 1), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Testq', response.data)
         self.assertNotIn(b'Deleting test: Duel-Monster name', response.data)
 
 #Test deleting a Duel Monster type from database
-class TestDelq(TestBase):
-    def test_del_q(self):
+class TestDeleteType(TestBase):
+    def test_delete_type(self):
         response = self.client.get(url_for('deletetype', id = 1), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertNotIn(b'Deleting test: Duel-Monster type', response.data)
