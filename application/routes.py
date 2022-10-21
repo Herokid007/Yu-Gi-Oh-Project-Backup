@@ -1,4 +1,3 @@
-from asyncio import Task
 from flask import render_template, url_for, redirect, request 
 from application import app, db
 from application.models import MonsterName, MonsterType
@@ -19,7 +18,9 @@ def addtype():
     form = TypeForm()
     if form.validate_on_submit():
         mtypes = MonsterType(
-            name = form.name.data
+            type = form.type.data,
+            fk_nameid = form.fk_nameid.data
+            
         )
         db.session.add(mtypes)
         db.session.commit()
@@ -31,15 +32,16 @@ def addtype():
 @app.route("/monstername", methods=["POST", "GET"])
 def addname():
     #Navigates to MonsterForm
-    form = Monsterform
+    form = Monsterform()
     #Validates if the user entered the submit button
-    if form.validates_on_submit():
+    if form.validate_on_submit():
         #The variable "names" will be displayed on the form
         #The MonsterName will be added to the database
         monsters = MonsterName(
-            names = form.name.data,
+            name = form.name.data,
+            #stars = form.stars.data
             #Foreign key used as a option to add to the create process
-            fk_typeid = form.fk_typeid.data
+            
         )
         #The code add to the database.
         db.session.add(monsters)
@@ -52,10 +54,10 @@ def addname():
 
 #UPDATE the duel monster type
 #Location for the app function: ip_address:5000/updatemonstertype
-@app.route("/updatemonstertype/<int:id>", methods=["GET", "POST"])
-def updatetype(id):
+@app.route("/updatetype/<int:mtid>", methods=["GET", "POST"])
+def updatetype(mtid):
     form = TypeForm()
-    mtypes = MonsterType.query.get(id)
+    mtypes = MonsterType.query.get(mtid)
     if form.validate_on_submit():
         mtypes.name = form.type.data
         db.session.commit()
@@ -66,7 +68,7 @@ def updatetype(id):
 
 #UPDATE the duel monster name.
 #Location for the app function: ip_address:5000/updatemonstername
-@app.route("/updatemonstername/<int:id>", methods=["GET", "POST"])
+@app.route("/updatename/<int:id>", methods=["GET", "POST"])
 def updatename(id):
     form = Monsterform()
     #Retrieves one duel monster name via specified ID.
@@ -90,9 +92,9 @@ def updatename(id):
         
 #DELETE duel monster type
 #Location for the app function: ip_address:5000/deletetype
-@app.route("/deletetype/<int:id>")
-def deletetype(id):
-    mtype = MonsterType.query.get(id)
+@app.route("/deletetype/<int:mtid>")
+def deletetype(mtid):
+    mtype = MonsterType.query.get(mtid)
     db.session.delete(mtype)
     db.session.commit()
     return redirect(url_for("index"))
