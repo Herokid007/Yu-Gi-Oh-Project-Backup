@@ -71,42 +71,36 @@ class TestUpdateName1(TestBase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Updating test: Duel-Monster name1', response.data)
         
-# Test updating te Duel M
+#Test updating a Duel Monster name
 class TestUpdateName2(TestBase):
     def test_update_name2(self):
         response = self.client.post(url_for('updatename'), data = dict(q_type="Dark-Magician-Test"), follow_redirects=True)
         self.assertIn(b'Adding test: Duel-Monster type2',response.data)
 
-# Test sending a GET request to the add options page
+#Test sending a GET request to update Duel Monster type
 class TestUpdateType1(TestBase):
     def test_update_type1(self):
         response = self.client.get(url_for('updatetype', id=1))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Updating test: Duel-Monster type1', response.data)
 
-# Test adding a question
+#Test updating a Duel Monster name
 class TestUpdateType2(TestBase):
     def test_update_type2(self):
         response = self.client.post(url_for('updatetype'), data = dict(q_type="Spellcaster-Test"), follow_redirects=True)
         self.assertIn(b'Updating test: Duel-Monster type2',response.data)
 
-
-
-
-
-
-
-# Test Deleting an option
-class TestDelo(TestBase):
+#Test deleting a Duel Monster name from database
+class TestDeleteName(TestBase):
     def test_del_o(self):
-        response = self.client.get(url_for('delete_o', oid = 1), follow_redirects=True)
+        response = self.client.get(url_for('deletename', id = 1), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Testq', response.data)
-        self.assertNotIn(b'This is a test option', response.data)
+        self.assertNotIn(b'Deleting test: Duel-Monster name', response.data)
 
-# Test Deleting a question
+#Test deleting a Duel Monster type from database
 class TestDelq(TestBase):
     def test_del_q(self):
-        response = self.client.get(url_for('delete_q', qid = 1), follow_redirects=True)
+        response = self.client.get(url_for('deletetype', id = 1), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
-        self.assertNotIn(b'Testq', response.data)
+        self.assertNotIn(b'Deleting test: Duel-Monster type', response.data)
