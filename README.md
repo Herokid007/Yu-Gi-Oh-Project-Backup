@@ -41,11 +41,9 @@ Jenkins will be used as the build server to provide the automation for both the 
  ## The Risk Assessment
  
 Before buidling the web app, a risk assessment was conducted to identify and to propose measure to control the potential risks that could affect the process for deploying the app. The measure will then be implemented in the app, the initial risk assesment is illustrated below:
- 
 
- 
- 
- 
+![Picture8](https://user-images.githubusercontent.com/108364254/197365789-188f763d-005d-4369-9af0-e750a6bf75d3.png)
+
  
  
  
