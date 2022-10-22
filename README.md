@@ -43,6 +43,12 @@ Jenkins will be used as the build server to provide the automation for both the 
 Before buidling the web app, a risk assessment was conducted to identify and to propose measure to control the potential risks that could affect the process for deploying the app. The measure will then be implemented in the app, the initial risk assesment is illustrated below:
 
 ![Picture8](https://user-images.githubusercontent.com/108364254/197365789-188f763d-005d-4369-9af0-e750a6bf75d3.png)
+The control measure implemented in the project will demostrate the risk assesment in terms of:
+* The user profiles per database was not part of the initial design, as this would reqire sending an authentication process via unsecured HTTP connection.
+* The SQLAlchemy was inerfaced with the Flask micro-framework to prevent MySQL commands being sent directly via the database.
+* The credentuals will be stored as a secret text via Jenkins VMs and exported as environment variable to avoid releasing confidential information.
+
+The likelihood and impact level of each risk identified were estimated before and after the implementation of each control measures, to quantify the effect of potential control measures and implementation.
 
  
  
@@ -61,5 +67,5 @@ Before buidling the web app, a risk assessment was conducted to identify and to 
  
  
  
- d
+ 
 
