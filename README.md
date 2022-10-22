@@ -23,6 +23,6 @@ In terms of the design I have chosen to build a Yu-Gi-Oh! database app, which al
 
 ![Picture6](https://user-images.githubusercontent.com/108364254/197350597-fbe5e13e-a0be-4dcc-97a8-081a5e7dc5ac.png)
 
-The ERD diagram illustrates the functionality of the MySQL database.  
+The ERD diagram illustrates the functionality of the MySQL database. The foreign key is assiocated with the duel monster name and level, where card ID will be linked via both the name and type relationship.
 
 
