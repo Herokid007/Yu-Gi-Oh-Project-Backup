@@ -25,4 +25,18 @@ In terms of the design I have chosen to build a Yu-Gi-Oh! database app, which al
 
 The ERD diagram illustrates the functionality of the MySQL database. The foreign key is assiocated with the duel monster name and level, where card ID will be linked via both the name and type relationship.
 
+## The CI/CD Pipeline 
+The project required the implementation of several stages of a automated CI/CD pipeline. These included: versiom control, development enviroment and an build server.
+
+<INSERT IMAGE HERE>
+
+Github was used for version control the project respository hosted via Github.com. In terms of version control via Github this allows updates to the project to be commited and pushed, whilst keeping the commit history for access to previous versions. The Github as a repository allows the repository to host the service and to be stored via the development enviroment, in addition providing webhooks, which sends HTTP POST requests to the build server to automate both the build and the unit-testing.
+  
+The development environment used was Python3 virtual environment (venv) hosted on a virtual machine running Ubuntu 20.04. Python is used as the core for the code and the Flask is a python-based micro-framework. The venv allows the pip to install the basic requirements.txt and the performance of the app to run without causing any conflicts when pip install the modules on the same machine or VMs.
+
+Jenkins will be used as the build server to provide the automation for both the build and the unit-testing. It is to note the automation is achieved by setting up a freestyle project, which will execute the test.sh script when it recieves the webhook via Github (files needs to commited then pushed). Jenkins will also be used to run the app via Gunicorn, achieved when testing is completed.
+
+<INSERT IMAGE HERE>
+  
+ ## The Risk Assessment
 
