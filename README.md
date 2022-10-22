@@ -21,6 +21,8 @@ The diagram illusrates the basic premise of the web app functionality. The HTML 
 ## The App Design
 In terms of the design I have chosen to build a Yu-Gi-Oh! database app, which allows users to enter their favourite duel monster card and the monster type (create function), view the new data via the index.html page (read function), users can also update the current data, i.e. the ID of the duel monster card is linked to the card name and type (update function), additionally the user can also delete the current data relative to the card ID (delete function). The database for this project consists of a duel monster name table and an duel monster type table, hence with each duel monster type is associated with multiple duel monster names (one-to-many relationship). The Entity Relationship Diagram is illustrated below:
 
-![Picture5](https://user-images.githubusercontent.com/108364254/197350483-81a33653-ac9c-4ce1-87f6-19bec93ef1b1.png)
+![Picture6](https://user-images.githubusercontent.com/108364254/197350597-fbe5e13e-a0be-4dcc-97a8-081a5e7dc5ac.png)
+
+The ERD diagram illustrates the functionality of the MySQL database.  
 
 
