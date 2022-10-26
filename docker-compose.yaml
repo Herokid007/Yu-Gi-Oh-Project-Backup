@@ -26,7 +26,7 @@ services:
   # This is going to be where I put my configuration to create my nginx container 
   nginx:
   # If this image is not available locally we will pull it from dockerhub. 
-    image: nginx:latest
+    image: neotaxman007/nginx:latest
     # Give container a name 
     container_name: nginx
     # Is where we specify ports for the container
