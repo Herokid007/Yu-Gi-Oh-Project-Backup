@@ -6,12 +6,12 @@ services:
     # Must be logged in to dockerhub to push, but not to pull container code from dockerhub. 
     # image: [HOST]/[AUTHOR]/[APPLICATION]:[TAG]
     # Build the Dockerfile that exists in this location
-    #image: neotaxman007/yugioh-project-flask-app:latest
+    image: neotaxman007/final-project-flask-app:latest
     build: ./flask-app
     container_name: flask-app
 
   mysql: 
-    #image: neotaxman007/yugioh-project-mysql:latest
+    image: neotaxman007/final-project-mysql:latest
     build: ./db
     container_name: mysql
     ports:
@@ -26,7 +26,7 @@ services:
   # This is going to be where I put my configuration to create my nginx container 
   nginx:
   # If this image is not available locally we will pull it from dockerhub. 
-    image: nginx:latest
+    image: neotaxman007/nginx:latest
     # Give container a name 
     container_name: nginx
     # Is where we specify ports for the container
