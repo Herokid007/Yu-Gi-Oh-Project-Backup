@@ -6,12 +6,12 @@ services:
     # Must be logged in to dockerhub to push, but not to pull container code from dockerhub. 
     # image: [HOST]/[AUTHOR]/[APPLICATION]:[TAG]
     # Build the Dockerfile that exists in this location
-    image: neotaxman007/yugioh_project-flask-app:latest
+    image: neotaxman007/yugioh-project-flask-app:latest
     build: ./flask-app
     container_name: flask-app
 
   mysql: 
-    image: neotaxman007/yugioh_project-mysql:latest
+    image: neotaxman007/yugioh-project-mysql:latest
     build: ./db
     container_name: mysql
     ports:
